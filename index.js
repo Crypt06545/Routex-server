@@ -26,34 +26,40 @@ async function run() {
   try {
     await client.connect();
 
-    // create a database
+    //create a database
     const database = client.db("VisaDB");
     const usersCollection = database.collection("NewVisa");
 
-    // get
+    //get requests
 
     //hello 
     app.get("/", (req, res) => {
       res.send("hello");
     });
     
-   // allvisas 
+   //allvisas 
     app.get("/allvisas", async (req, res) => {
       const allVisa = usersCollection.find();
       const result = await allVisa.toArray();
       res.json(result);
     });
+    //latest visas 
+    app.get("/latestvisas", async (req, res) => {
+      const allVisa = usersCollection.find().limit(6);
+      const result = await allVisa.toArray();
+      res.json(result);
+    });
 
-    // visaDetails 
+    //visaDetails 
     app.get("/visadetails/:id", async (req, res) => {
       const id = req.params.id;
       const visaDetails = await usersCollection.findOne({ _id: new ObjectId(id) });
       res.json(visaDetails);
     });
   
-    // post
+    //post requests
 
-    // addvisa 
+    //addvisa 
     app.post("/addvisa", async (req, res) => {
       const newVisa = req.body;
       // console.log(newVisa);
@@ -61,7 +67,7 @@ async function run() {
       res.send(result);
     });
 
-    // delete
+    //delete requests
 
     await client.db("admin").command({ ping: 1 });
     console.log(
