@@ -28,42 +28,55 @@ async function run() {
 
     //create a database
     const database = client.db("VisaDB");
+    
+    // db collection
     const usersCollection = database.collection("NewVisa");
+    const applyVisaCollection = database.collection("ApplyVisa");
 
     //get requests
 
-    //hello 
+    //hello
     app.get("/", (req, res) => {
       res.send("hello");
     });
-    
-   //allvisas 
+
+    //allvisas
     app.get("/allvisas", async (req, res) => {
       const allVisa = usersCollection.find();
       const result = await allVisa.toArray();
       res.json(result);
     });
-    //latest visas 
+    //latest visas
     app.get("/latestvisas", async (req, res) => {
       const allVisa = usersCollection.find().limit(6);
       const result = await allVisa.toArray();
       res.json(result);
     });
 
-    //visaDetails 
+    //visaDetails
     app.get("/visadetails/:id", async (req, res) => {
       const id = req.params.id;
-      const visaDetails = await usersCollection.findOne({ _id: new ObjectId(id) });
+      const visaDetails = await usersCollection.findOne({
+        _id: new ObjectId(id),
+      });
       res.json(visaDetails);
     });
-  
+
     //post requests
 
-    //addvisa 
+    //addvisa
     app.post("/addvisa", async (req, res) => {
       const newVisa = req.body;
       // console.log(newVisa);
       const result = await usersCollection.insertOne(newVisa);
+      res.send(result);
+    });
+
+    //applyvisa
+    app.post("/applyvisa", async (req, res) => {
+      const applyVisa = req.body;
+      // console.log(applyVisa);
+      const result = await applyVisaCollection.insertOne(applyVisa);
       res.send(result);
     });
 
