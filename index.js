@@ -31,14 +31,21 @@ async function run() {
     const usersCollection = database.collection("NewVisa");
 
     // get
-
     app.get("/", (req, res) => {
       res.send("hello");
+    });
+
+    app.get("/allvisas", async (req, res) => {
+      const allVisa = usersCollection.find();
+      const result = await allVisa.toArray();
+      res.json(result);
     });
     // post
     app.post("/addvisa", async (req, res) => {
       const newVisa = req.body;
-      console.log(newVisa);
+      // console.log(newVisa);
+      const result = await usersCollection.insertOne(newVisa);
+      res.send(result);
     });
 
     // delete
