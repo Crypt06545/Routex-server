@@ -28,7 +28,7 @@ async function run() {
 
     //create a database
     const database = client.db("VisaDB");
-    
+
     // db collection
     const usersCollection = database.collection("NewVisa");
     const applyVisaCollection = database.collection("ApplyVisa");
@@ -46,10 +46,11 @@ async function run() {
       const result = await allVisa.toArray();
       res.json(result);
     });
+
     //latest visas
     app.get("/latestvisas", async (req, res) => {
-      const allVisa = usersCollection.find().limit(6);
-      const result = await allVisa.toArray();
+      const latestvisas = usersCollection.find().limit(6);
+      const result = await latestvisas.toArray();
       res.json(result);
     });
 
@@ -62,7 +63,18 @@ async function run() {
       res.json(visaDetails);
     });
 
+    // myaddedvisa
+    // app.get('/myaddedvisa/:email', async(req,res)=>{
+    //   const email = re
+    // })
     //post requests
+
+    // my added visas
+    app.get("/myvisas/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await applyVisaCollection.find({ email }).toArray();
+      res.json(result);
+    });
 
     //addvisa
     app.post("/addvisa", async (req, res) => {
