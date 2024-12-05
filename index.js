@@ -67,15 +67,31 @@ async function run() {
     // app.get('/myaddedvisa/:email', async(req,res)=>{
     //   const email = re
     // })
-    //post requests
-
+    
+    // // my created visas
+    // app.get("/createdvisa/:email", async (req, res) => {
+    //   const email = req.params.email;
+    //   const result = await applyVisaCollection.find({ email }).toArray();
+    //   res.json(result);
+    // });
+    
     // my added visas
-    app.get("/applyvisas/:email", async (req, res) => {
+    app.get("/myvisas/:email", async (req, res) => {
       const email = req.params.email;
       const result = await applyVisaCollection.find({ email }).toArray();
       res.json(result);
     });
-
+    
+    
+    //post requests
+    //applyvisa
+    app.post("/applyvisa", async (req, res) => {
+      const applyVisa = req.body;
+      // console.log(applyVisa);
+      const result = await applyVisaCollection.insertOne(applyVisa);
+      res.send(result);
+    });
+    
     //addvisa
     app.post("/addvisa", async (req, res) => {
       const newVisa = req.body;
@@ -84,15 +100,10 @@ async function run() {
       res.send(result);
     });
 
-    //applyvisa
-    app.post("/applyvisa", async (req, res) => {
-      const applyVisa = req.body;
-      // console.log(applyVisa);
-      const result = await applyVisaCollection.insertOne(applyVisa);
-      res.send(result);
-    });
-
-    //delete requests
+    // //delete requests
+    // app.delete('/rmyapplication/:id', async(req,res)=>{
+    //   const removeMyApplication = req.
+    // })
 
     await client.db("admin").command({ ping: 1 });
     console.log(
