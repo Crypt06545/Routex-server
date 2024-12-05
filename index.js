@@ -70,7 +70,7 @@ async function run() {
     //post requests
 
     // my added visas
-    app.get("/myvisas/:email", async (req, res) => {
+    app.get("/applyvisas/:email", async (req, res) => {
       const email = req.params.email;
       const result = await applyVisaCollection.find({ email }).toArray();
       res.json(result);
