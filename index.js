@@ -40,20 +40,17 @@ async function run() {
       res.send("hello");
     });
 
-
     app.get("/allvisas", async (req, res) => {
       const allVisa = usersCollection.find();
       const result = await allVisa.toArray();
       res.json(result);
     });
 
-
     app.get("/latestvisas", async (req, res) => {
       const latestvisas = usersCollection.find().limit(6);
       const result = await latestvisas.toArray();
       res.json(result);
     });
-
 
     app.get("/visadetails/:id", async (req, res) => {
       const id = req.params.id;
@@ -62,7 +59,6 @@ async function run() {
       });
       res.json(visaDetails);
     });
-
 
     app.get("/myvisas/:email", async (req, res) => {
       const email = req.params.email;
@@ -105,6 +101,30 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await usersCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // update method
+    app.patch("/updatevisa/:id", async (req, res) => {
+      const id = req.params.id;
+      // console.log(id);
+
+      const data = req.body;
+      const query = { _id: new ObjectId(id) };
+      const update = {
+        $set: {
+          countryImage: data?.countryImage,
+          countryName: data?.countryName,
+          visaType: data?.visaType,
+          processingTime: data?.processingTime,
+          description: data?.description,
+          ageRestriction: data?.ageRestriction,
+          fee: data?.fee,
+          validity: data?.validity,
+          applicationMethod: data?.applicationMethod,
+        },
+      };
+      const result = await usersCollection.updateOne(query, update);
       res.send(result);
     });
 
