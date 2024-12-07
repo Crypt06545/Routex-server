@@ -19,28 +19,3 @@ and tutorials.
 </p>
 
 <hr/>
-<p align="center" style="font-size: 34px; font-weight:bold">
- REST API
-</p>
-
-<p style=" font-weight:bold">
- GET: All Visas
-</p>
-
-Endpoint: [https://visa-server-rrqj.onrender.com/allvisas](https://visa-server-rrqj.onrender.com/allvisas) <br/>
-
-<hr/>
-<p style=" font-weight:bold">
- GET: Latest Visas
-</p>
-
-Endpoint: [https://visa-server-rrqj.onrender.com/latestvisas](https://visa-server-rrqj.onrender.com/latestvisas) <br/>
-
-<hr/>
-<p style=" font-weight:bold">
- GET: Visa Details based on id [ params ]
-</p>
-
-Example: [https://visa-server-rrqj.onrender.com/visadetails/6753e56b5e782ffa8f630842](https://visa-server-rrqj.onrender.com/visadetails/6753e56b5e782ffa8f630842) <br/>
-
-<hr/>
