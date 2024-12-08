@@ -1,3 +1,8 @@
+# Visa Application Management API
+
+A robust backend API built with **Node.js**, **Express**, and **MongoDB**, designed to streamline the management of visa applications. The API supports CRUD operations, user-specific functionality, and efficient handling of visa-related data.
+
+
 ## Technologies Used
 
 <table>
@@ -17,5 +22,27 @@
 - **Backend**: Node.js, Express.js, MongoDB, Firebase Authentication
 and tutorials.
 </p>
+
+
+
+
+## Features
+
+- **View All Visas**: Fetch a list of all available visas.
+- **Latest Visas**: Retrieve the six most recent visas.
+- **Apply for a Visa**: Submit new visa applications for storage in the database.
+- **User-Specific Management**: View and manage visas specific to a user based on their email.
+- **CRUD Operations**: Add, update, and delete visa records.
+
+## Prerequisites
+
+- Node.js (v14+ recommended)
+- MongoDB Atlas account or local MongoDB setup
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
 
 <hr/>
